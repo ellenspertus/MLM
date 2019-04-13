@@ -46,7 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try (Cursor cursor = db.query(SUBSCRIBERS_TABLE,
                 new String[]{}, EMAIL_COL + " = ?",
                 new String[]{email}, null, null, null)) {
-            return cursor.getColumnCount() == 1;
+            return cursor.getCount() == 1;
         }
     }
 
