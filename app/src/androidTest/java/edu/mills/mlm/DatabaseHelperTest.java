@@ -34,6 +34,7 @@ public class DatabaseHelperTest {
 
     @Test
     public void testAddingSubscriber() {
+        assertEquals(0, helper.getNumSubscribers(db));
         assertFalse(
                 EMAIL1 + " should not be subscribed in new database.",
                 helper.isSubscribed(db, EMAIL1));
@@ -42,5 +43,15 @@ public class DatabaseHelperTest {
                 EMAIL1 + " should be subscribed after adding to database.",
                 helper.isSubscribed(db, EMAIL1));
         assertEquals(1, helper.getNumSubscribers(db));
+    }
+
+    @Test
+    public void testDeletingSubscribers() {
+        helper.addSubscriber(db, EMAIL1, NAME1);
+        helper.deleteAllSubscribers(db);
+        assertFalse(
+                EMAIL1 + " should not be subscribed after deleting all subscribers.",
+                helper.isSubscribed(db, EMAIL1));
+        assertEquals(0, helper.getNumSubscribers(db));
     }
 }
