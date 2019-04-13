@@ -1,9 +1,17 @@
 package edu.mills.mlm;
 
+import java.util.regex.Pattern;
+
 /**
  * Static utility class for parsing and validating email addresses.
  */
 public class EmailAddressParser {
+    // Source: https://stackoverflow.com/a/8204716/631051
+    // This does not work for non-ASCII characters in username.
+    private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+                    Pattern.CASE_INSENSITIVE);
+
     private EmailAddressParser() {}
 
     /**
@@ -16,6 +24,6 @@ public class EmailAddressParser {
      * {@code false} otherwise
      */
     public static boolean isValid(String email) {
-        return false;
+        return email != null && VALID_EMAIL_ADDRESS_REGEX.matcher(email).find();
     }
 }
