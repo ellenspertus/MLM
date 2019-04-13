@@ -8,7 +8,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class DatabaseHelperTest {
     private static final String EMAIL1 = "susan@mills.edu";
@@ -39,5 +41,6 @@ public class DatabaseHelperTest {
         assertTrue(
                 EMAIL1 + " should be subscribed after adding to database.",
                 helper.isSubscribed(db, EMAIL1));
+        assertEquals(1, helper.getNumSubscribers(db));
     }
 }

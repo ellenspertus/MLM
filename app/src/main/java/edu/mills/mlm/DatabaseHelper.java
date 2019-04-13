@@ -50,6 +50,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    int getNumSubscribers(SQLiteDatabase db) {
+        try (Cursor cursor = db.query(SUBSCRIBERS_TABLE,
+                new String[]{}, null,
+                null, null, null, null)) {
+            return cursor.getCount();
+        }
+    }
+
     void deleteAllSubscribers(SQLiteDatabase db) {
         db.delete(SUBSCRIBERS_TABLE, null, null);
     }
